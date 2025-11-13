@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: edw_staging                  # You can choose any source name
+    database: PROD_TZ                  # The database name
+    schema: EDW_STAGING                # The schema name
+    tables:
+      - name: ACCT
+        description: "Account master table from EDW_STAGING."
+      - name: CHARGTYP
+        description: "Charge type lookup table from EDW_STAGING."
