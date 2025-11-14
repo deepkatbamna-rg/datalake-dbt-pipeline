@@ -1,4 +1,9 @@
-{{ config(materialized='table', tag = ['edw_staging']) }}
+{{ config(
+    materialized='incremental',
+    unique_key='ChargeCodeSPK',
+    on_schema_change='ignore'
+) }}
+
 
 with
     stg_chargecodemap as (
@@ -22,7 +27,7 @@ select
     row_number() over (order by tgt.chargecodespk) as dimchargewid,
     tgt.chargecodespk,
     tgt.chargecode,
-    cast(tgt.chargename as varchar(50)) as chargename,
+    cast(tgt.chargename as varchar(16777216)) as chargename,
     tgt.rowsourcesystem,
     cast(current_timestamp as datetime) as insertdatetime, 
     cast(current_timestamp as datetime) as updatedatetime
