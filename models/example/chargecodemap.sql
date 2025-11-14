@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='table', tag = ['edw_staging']) }}
 
 with
     charges as (
